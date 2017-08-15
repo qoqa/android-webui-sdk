@@ -4,9 +4,7 @@
     <modules>
       <module fileurl="file://C:\Users\kevin\StudioProjects\queueit-android-sdk\android-sdk.iml" filepath="C:\Users\kevin\StudioProjects\queueit-android-sdk\android-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/demoapp/demoapp.iml" filepath="$PROJECT_DIR$/demoapp/demoapp.iml" />
-      <module fileurl="file://C:\Users\kevin\StudioProjects\queueit-android-sdk\demoapp\demoapp.iml" filepath="C:\Users\kevin\StudioProjects\queueit-android-sdk\demoapp\demoapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://C:\Users\kevin\StudioProjects\queueit-android-sdk\library\library.iml" filepath="C:\Users\kevin\StudioProjects\queueit-android-sdk\library\library.iml" />
       <module fileurl="file://$PROJECT_DIR$/queueit-android-sdk.iml" filepath="$PROJECT_DIR$/queueit-android-sdk.iml" />
     </modules>
   </component>
