@@ -22,9 +22,21 @@ subprojects {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    // sdk and tools
+    minSdkVersion = 15
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.1'
+
+    // dependencies versions
+    supportLibraryVersion = '26.0.1'
 }
