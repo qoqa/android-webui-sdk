@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
@@ -15,7 +14,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
 
-import java.lang.ref.WeakReference;
 import java.util.Calendar;
 
 public class QueueITEngine {
@@ -139,36 +137,18 @@ public class QueueITEngine {
 
     private void registerReceivers()
     {
-        // Don't keep strong reference to the engine for avoiding memory leak
-        final WeakReference<QueueITEngine> weakThis = new WeakReference<>(this);
+        LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                raiseQueuePassed(intent.getStringExtra("queue-it-token"));
+            }}, new IntentFilter("on-queue-passed"));
 
         LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                QueueITEngine engine = weakThis.get();
-                if (engine != null) {
-                    engine.raiseQueuePassed(intent.getStringExtra("queue-it-token"));
-                }
-            }}, new IntentFilter("on-queue-passed")
-        );
-
-        LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Bundle extras = intent.getExtras();
-                String url;
-                if (extras != null) {
-                    url = extras.getString("url");
-                } else {
-                    url = "";
-                }
-
-                QueueITEngine engine = weakThis.get();
-                if (engine != null) {
-                    engine.updateQueuePageUrl(url);
-                }
-            }}, new IntentFilter("on-changed-queue-url")
-        );
+                String url = intent.getExtras().getString("url");
+                updateQueuePageUrl(url);
+            }}, new IntentFilter("on-changed-queue-url"));
     }
 
     private boolean tryToShowQueueFromCache()
