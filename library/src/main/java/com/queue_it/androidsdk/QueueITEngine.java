@@ -109,7 +109,7 @@ public class QueueITEngine {
         _checkConnection.run();
     }
 
-    public String getSdkVersion()
+    public static String getSdkVersion()
     {
         return "Android-" + BuildConfig.VERSION_NAME;
     }
