@@ -1,11 +1,12 @@
 package com.queue_it.androidsdk;
 
+import android.support.annotation.NonNull;
 
 public interface QueueListener {
     void onQueuePassed(QueuePassedInfo queuePassedInfo);
     void onQueueViewWillOpen();
     void onQueueDisabled();
     void onQueueItUnavailable();
-    void onQueueIdChanged(String queueId);
+    void onQueueIdChanged(@NonNull String queueId);
     void onError(Error error, String errorMessage);
 }
