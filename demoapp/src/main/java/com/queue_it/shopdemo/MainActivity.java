@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("eventOrAliasId", eventOrAliasId);
                 editor.putString("layoutName", layoutName);
                 editor.putString("language", language);
-                editor.commit();
+                editor.apply();
 
                 Toast.makeText(getApplicationContext(), "Please wait for your turn.", Toast.LENGTH_SHORT).show();
 
