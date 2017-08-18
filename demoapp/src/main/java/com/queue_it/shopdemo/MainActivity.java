@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.queue_it.androidsdk.*;
 import com.queue_it.androidsdk.Error;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onQueueIdCreated(String queueId) {
+                    public void onQueueIdChanged(String queueId) {
                         Toast.makeText(MainActivity.this, "Your queueId is " + queueId, Toast.LENGTH_SHORT).show();
                     }
 

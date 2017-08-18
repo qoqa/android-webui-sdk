@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
@@ -234,7 +235,7 @@ public class QueueITEngine {
 
                     _queueCache.update(queueUrlString, queueUrlTtl, eventTargetUrl);
 
-                    _queueListener.onQueueIdCreated(queueId);
+                    _queueListener.onQueueIdChanged(queueId);
                 }
                 else if (IsIdle(queueId, queueUrlString))
                 {
@@ -304,6 +305,12 @@ public class QueueITEngine {
         if (!_queueCache.isEmpty())
         {
             _queueCache.update(queueUrl, _queueCache.getUrlTtl(), _queueCache.getTargetUrl());
+        }
+
+        Uri uri = Uri.parse(queueUrl);
+        String queueId = uri.getQueryParameter("q");
+        if (queueId != null && !TextUtils.isEmpty(queueId)) {
+            _queueListener.onQueueIdChanged(queueId);
         }
     }
 
