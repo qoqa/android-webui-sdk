@@ -109,6 +109,11 @@ public class QueueITEngine {
         _checkConnection.run();
     }
 
+    public String getSdkVersion()
+    {
+        return "Android-" + BuildConfig.VERSION_NAME;
+    }
+
     private Runnable _checkConnection = new Runnable() {
         public void run() {
             if (isOnline())
@@ -312,10 +317,5 @@ public class QueueITEngine {
         if (queueId != null && !TextUtils.isEmpty(queueId)) {
             _queueListener.onQueueIdChanged(queueId);
         }
-    }
-
-    private String getSdkVersion()
-    {
-        return "Android-" + BuildConfig.VERSION_NAME;
     }
 }
