@@ -159,6 +159,7 @@ public class QueueActivity extends AppCompatActivity {
                 if (!isQueueDomain) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
                     startActivity(browserIntent);
+                    disposeWebview(webView);
                     return true;
                 }
 
