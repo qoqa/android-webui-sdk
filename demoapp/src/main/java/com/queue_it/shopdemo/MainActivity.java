@@ -19,6 +19,7 @@ import com.queue_it.androidsdk.Error;
 import com.queue_it.androidsdk.QueueITEngine;
 import com.queue_it.androidsdk.QueueITException;
 import com.queue_it.androidsdk.QueueListener;
+import com.queue_it.androidsdk.QueuePassedInfo;
 import com.queue_it.androidsdk.QueueService;
 
 public class MainActivity extends AppCompatActivity {
