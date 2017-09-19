@@ -2,11 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:theme="@style/Theme.AppCompat.NoActionBar">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/queueToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
 
     <WebView
+        android:id="@+id/queueWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/queueToolbar" />
 
     <ProgressBar
+        android:id="@+id/queueProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="8dp"
+        android:layout_below="@id/queueToolbar"
         android:max="100"
         android:progressBackgroundTint="#FFFFFFFF"
+        android:progressTint="#FF29A8FF"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</RelativeLayout>
