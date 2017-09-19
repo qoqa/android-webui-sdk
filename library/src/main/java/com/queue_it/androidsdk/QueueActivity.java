@@ -142,10 +142,9 @@ public class QueueActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-                boolean isQueueUrl = queue.getHost().contains(url.getHost());
+                boolean isQueueDomain = queue.getHost().contains(url.getHost());
 
-                if (isQueueUrl)
-                {
+                if (isQueueDomain) {
                     broadcastChangedQueueUrl(urlString);
                 }
 
@@ -157,8 +156,7 @@ public class QueueActivity extends AppCompatActivity {
                     disposeWebview(webView);
                     return true;
                 }
-                if (!isQueueUrl)
-                {
+                if (!isQueueDomain) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
                     startActivity(browserIntent);
                     return true;
