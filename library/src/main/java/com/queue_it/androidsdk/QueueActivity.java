@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -41,9 +42,17 @@ public class QueueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
 
-        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        final Toolbar toolbar = findViewById(R.id.queueToolbar);
+        final ProgressBar progressBar = findViewById(R.id.queueProgressBar);
+        final WebView webView = findViewById(R.id.queueWebView);
 
-        final WebView webView = (WebView)findViewById(R.id.webView);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -157,7 +166,7 @@ public class QueueActivity extends AppCompatActivity {
                     disposeWebview(webView);
                     return true;
                 }
-                
+
                 if (!isTargetDomain && !isQueueDomain) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
                     startActivity(browserIntent);
