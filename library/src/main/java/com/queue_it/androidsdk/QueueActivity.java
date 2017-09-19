@@ -142,13 +142,14 @@ public class QueueActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-                boolean isQueueDomain = queue.getHost().contains(url.getHost());
+                boolean isQueueDomain = url.getHost().equals(queue.getHost());
+                boolean isTargetDomain = url.getHost().equals(target.getHost());
 
                 if (isQueueDomain) {
                     broadcastChangedQueueUrl(urlString);
                 }
 
-                if (url.getHost().equals(target.getHost()) && url.getPath().equals(target.getPath())) {
+                if (isTargetDomain && url.getPath().equals(target.getPath())) {
                     Uri uri = Uri.parse(urlString);
                     String queueItToken = uri.getQueryParameter("queueittoken");
 
@@ -156,7 +157,8 @@ public class QueueActivity extends AppCompatActivity {
                     disposeWebview(webView);
                     return true;
                 }
-                if (!isQueueDomain) {
+                
+                if (!isTargetDomain && !isQueueDomain) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
                     startActivity(browserIntent);
                     disposeWebview(webView);
