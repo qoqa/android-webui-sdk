@@ -149,7 +149,7 @@ public class QueueActivity extends AppCompatActivity {
                     broadcastChangedQueueUrl(urlString);
                 }
 
-                if (target.getHost().contains(url.getHost())) {
+                if (url.getHost().equals(target.getHost()) && url.getPath().equals(target.getPath())) {
                     Uri uri = Uri.parse(urlString);
                     String queueItToken = uri.getQueryParameter("queueittoken");
 
