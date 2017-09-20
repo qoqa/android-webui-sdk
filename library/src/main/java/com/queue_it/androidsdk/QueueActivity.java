@@ -1,6 +1,7 @@
 package com.queue_it.androidsdk;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -78,6 +79,15 @@ public class QueueActivity extends AppCompatActivity {
         }
 
         Log.v("QueueITEngine", "Loading initial URL: " + queueUrl);
+
+        final Application application = getApplication();
+        if (application instanceof UserAgentProvider) {
+            final String userAgent = ((UserAgentProvider) application).getUserAgent();
+            if (userAgent != null) {
+                Log.v("QueueITEngine", "Set Webview UserAgent to: " + userAgent);
+                webView.getSettings().setUserAgentString(userAgent);
+            }
+        }
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient()
