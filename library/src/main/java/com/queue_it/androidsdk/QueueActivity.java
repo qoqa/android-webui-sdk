@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -120,15 +123,41 @@ public class QueueActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                String errorMessage;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    errorMessage = String.format("%s %s: %s %s", request.getMethod(), request.getUrl(), error.getErrorCode(), error.getDescription());
-                } else {
-                    errorMessage = error.toString();
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Log.e("QueueActivity", String.format("Fail to load %s. Code: %s, Message: %s", failingUrl, errorCode, description));
+                handleMainError(errorCode);
+            }
+
+            @Override
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            public void onReceivedError(final WebView view, final WebResourceRequest request, WebResourceError error) {
+                if (request.isForMainFrame()) {
+                    Log.e("QueueActivity", String.format("Fail to load %s. Code: %s. Message: %s", request.getUrl(), error.getErrorCode(), error.getDescription()));
+                    handleMainError(error.getErrorCode());
                 }
-                Log.v("QueueActivity", String.format("%s: %s", "onReceivedError", errorMessage));
-                super.onReceivedError(view, request, error);
+            }
+
+            private void handleMainError(int errorCode) {
+                switch (errorCode) {
+                    case ERROR_UNKNOWN:
+                    case ERROR_HOST_LOOKUP:
+                    case ERROR_CONNECT:
+                    case ERROR_IO:
+                    case ERROR_TIMEOUT:
+                    case ERROR_REDIRECT_LOOP:
+                    case ERROR_FAILED_SSL_HANDSHAKE:
+                    case ERROR_FILE_NOT_FOUND:
+                    case ERROR_TOO_MANY_REQUESTS:
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.reload();
+                            }
+                        }, 2000);
+                        break;
+                    default:
+                        finish();
+                }
             }
 
             @Override
