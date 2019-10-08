@@ -1,6 +1,6 @@
 package com.queue_it.androidsdk;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public interface QueueListener {
     void onQueuePassed(QueuePassedInfo queuePassedInfo);

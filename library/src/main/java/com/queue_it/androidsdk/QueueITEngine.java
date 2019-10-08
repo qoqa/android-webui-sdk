@@ -10,10 +10,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.Calendar;
 
