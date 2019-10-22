@@ -21,6 +21,7 @@ import java.util.Calendar;
 public class QueueITEngine {
 
     private String _customerId;
+    private String _enqueueToken;
     private String _eventOrAliasId;
     private String _layoutName;
     private String _language;
@@ -42,10 +43,16 @@ public class QueueITEngine {
 
     public QueueITEngine(Activity activity, String customerId, String eventOrAliasId, QueueListener queueListener)
     {
-        this(activity, customerId, eventOrAliasId, "", "", queueListener);
+        this(activity, customerId, "", eventOrAliasId, "", "", queueListener);
     }
 
     public QueueITEngine(Activity activity, String customerId, String eventOrAliasId, String layoutName,
+                         String language, QueueListener queueListener)
+    {
+        this(activity, customerId, "", eventOrAliasId, layoutName, language, queueListener);
+    }
+
+    public QueueITEngine(Activity activity, String customerId, String enqueueToken, String eventOrAliasId, String layoutName,
                          String language, QueueListener queueListener)
     {
         if (TextUtils.isEmpty(customerId))
@@ -58,6 +65,7 @@ public class QueueITEngine {
         }
         _activity = activity;
         _customerId = customerId;
+        _enqueueToken = enqueueToken;
         _eventOrAliasId = eventOrAliasId;
         _layoutName = layoutName;
         _language = language;
@@ -265,7 +273,7 @@ public class QueueITEngine {
             }
         };
 
-        QueueService queueService = new QueueService(_customerId, _eventOrAliasId, userId,
+        QueueService queueService = new QueueService(_customerId, _eventOrAliasId, userId, _enqueueToken,
                 userAgent, sdkVersion, _layoutName, _language, queueServiceListener);
         queueService.init(_activity);
     }

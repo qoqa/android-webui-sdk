@@ -30,6 +30,7 @@ public class QueueService {
     private String _customerId;
     private String _eventOrAliasId;
     private String _userId;
+    private String _enqueueToken;
     private String _userAgent;
     private String _sdkVersion;
     private String _layoutName;
@@ -47,13 +48,14 @@ public class QueueService {
         }
     }
 
-    public QueueService(String customerId, String eventOrAliasId, String userId,
+    public QueueService(String customerId, String eventOrAliasId, String userId, String enqueueToken,
                         String userAgent, String sdkVersion, String layoutName,
                         String language, QueueServiceListener queueServiceListener)
     {
         _customerId = customerId;
         _eventOrAliasId = eventOrAliasId;
         _userId = userId;
+        _enqueueToken = enqueueToken;
         _userAgent = userAgent;
         _sdkVersion = sdkVersion;
         _layoutName = layoutName;
@@ -165,6 +167,7 @@ public class QueueService {
             jsonObject.put("userId", _userId);
             jsonObject.put("userAgent", _userAgent);
             jsonObject.put("sdkVersion", _sdkVersion);
+            jsonObject.put("enqueueToken", _enqueueToken);
             if (!TextUtils.isEmpty(_layoutName)) {
                 jsonObject.put("layoutName", _layoutName);
             }
