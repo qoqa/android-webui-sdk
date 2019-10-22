@@ -310,11 +310,5 @@ public class QueueITEngine {
         {
             _queueCache.update(queueUrl, _queueCache.getUrlTtl(), _queueCache.getTargetUrl());
         }
-
-        Uri uri = Uri.parse(queueUrl);
-        String queueId = uri.getQueryParameter("q");
-        if (queueId != null && !TextUtils.isEmpty(queueId)) {
-            _queueListener.onQueueIdChanged(queueId);
-        }
     }
 }
