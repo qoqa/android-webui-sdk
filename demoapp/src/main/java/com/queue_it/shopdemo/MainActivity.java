@@ -104,11 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onQueueIdChanged(@NonNull String queueId) {
-                        Toast.makeText(MainActivity.this, "Your queueId is " + queueId, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
                     public void onError(Error error, String errorMessage) {
                         showResultActivity("Critical error: " + errorMessage, false);
                         queue_button.setEnabled(true);
