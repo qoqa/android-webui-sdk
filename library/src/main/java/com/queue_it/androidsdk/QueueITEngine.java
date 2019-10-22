@@ -240,8 +240,6 @@ public class QueueITEngine {
                     queueUrlTtl.add(Calendar.MINUTE, queueUrlTtlInMinutes);
 
                     _queueCache.update(queueUrlString, queueUrlTtl, eventTargetUrl);
-
-                    _queueListener.onQueueIdChanged(queueId);
                 }
                 else if (IsIdle(queueId, queueUrlString))
                 {
