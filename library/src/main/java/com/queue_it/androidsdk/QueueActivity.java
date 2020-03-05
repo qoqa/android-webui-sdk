@@ -226,8 +226,8 @@ public class QueueActivity extends AppCompatActivity {
     }
 
     private void broadcastQueuePassed(String queueItToken) {
-        Intent intent = new Intent("on-queue-passed");
-        intent.putExtra("queue-it-token-" + initAt, queueItToken);
+        Intent intent = new Intent("on-queue-passed-" + initAt);
+        intent.putExtra("queue-it-token", queueItToken);
         LocalBroadcastManager.getInstance(QueueActivity.this).sendBroadcast(intent);
     }
 

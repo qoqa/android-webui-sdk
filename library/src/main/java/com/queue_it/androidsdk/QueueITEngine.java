@@ -157,8 +157,8 @@ public class QueueITEngine {
         LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                raiseQueuePassed(intent.getStringExtra("queue-it-token-" + initAt));
-            }}, new IntentFilter("on-queue-passed"));
+                raiseQueuePassed(intent.getStringExtra("queue-it-token"));
+            }}, new IntentFilter("on-queue-passed-" + initAt));
 
         LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
             @Override
