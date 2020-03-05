@@ -20,6 +20,8 @@ import java.util.Calendar;
 
 public class QueueITEngine {
 
+    private final long initAt = System.currentTimeMillis();
+
     private String _customerId;
     private String _enqueueToken;
     private String _eventOrAliasId;
@@ -155,7 +157,7 @@ public class QueueITEngine {
         LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                raiseQueuePassed(intent.getStringExtra("queue-it-token"));
+                raiseQueuePassed(intent.getStringExtra("queue-it-token-" + initAt));
             }}, new IntentFilter("on-queue-passed"));
 
         LocalBroadcastManager.getInstance(_activity).registerReceiver(new BroadcastReceiver() {
@@ -163,7 +165,7 @@ public class QueueITEngine {
             public void onReceive(Context context, Intent intent) {
                 String url = intent.getExtras().getString("url");
                 updateQueuePageUrl(url);
-            }}, new IntentFilter("on-changed-queue-url"));
+            }}, new IntentFilter("on-changed-queue-url-" + initAt));
     }
 
     private boolean tryToShowQueueFromCache()
@@ -204,6 +206,7 @@ public class QueueITEngine {
         Intent intent = new Intent(_activity, QueueActivity.class);
         intent.putExtra("queueUrl", queueUrl);
         intent.putExtra("targetUrl", targetUrl);
+        intent.putExtra("initAt", initAt);
         _activity.startActivity(intent);
     }
 
