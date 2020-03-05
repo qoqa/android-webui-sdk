@@ -1,5 +1,6 @@
 package com.queue_it.androidsdk;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
@@ -42,6 +43,7 @@ public class QueueActivity extends AppCompatActivity {
         outState.putString("targetUrl", targetUrl);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
