@@ -34,6 +34,7 @@ public class QueueActivity extends AppCompatActivity {
 
     private String queueUrl;
     private String targetUrl;
+    private Long initAt;
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
@@ -41,6 +42,7 @@ public class QueueActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString("queueUrl", queueUrl);
         outState.putString("targetUrl", targetUrl);
+        outState.putLong("initAt", initAt);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -66,13 +68,16 @@ public class QueueActivity extends AppCompatActivity {
             if (extras == null) {
                 queueUrl = null;
                 targetUrl = null;
+                initAt = null;
             } else {
                 queueUrl = extras.getString("queueUrl");
                 targetUrl = extras.getString("targetUrl");
+                initAt = extras.getLong("initAt");
             }
         } else {
             queueUrl = (String) savedInstanceState.getSerializable("queueUrl");
             targetUrl = (String) savedInstanceState.getSerializable("targetUrl");
+            initAt = savedInstanceState.getLong("initAt");
         }
 
         final URL target;
@@ -215,14 +220,14 @@ public class QueueActivity extends AppCompatActivity {
     }
 
     private void broadcastChangedQueueUrl(String urlString) {
-        Intent intentChangedQueueUrl = new Intent("on-changed-queue-url");
+        Intent intentChangedQueueUrl = new Intent("on-changed-queue-url-" + initAt);
         intentChangedQueueUrl.putExtra("url", urlString);
         LocalBroadcastManager.getInstance(QueueActivity.this).sendBroadcast(intentChangedQueueUrl);
     }
 
     private void broadcastQueuePassed(String queueItToken) {
         Intent intent = new Intent("on-queue-passed");
-        intent.putExtra("queue-it-token", queueItToken);
+        intent.putExtra("queue-it-token-" + initAt, queueItToken);
         LocalBroadcastManager.getInstance(QueueActivity.this).sendBroadcast(intent);
     }
 
