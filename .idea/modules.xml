@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/demoapp/demoapp.iml" filepath="$PROJECT_DIR$/demoapp/demoapp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/queueit-android-sdk.iml" filepath="$PROJECT_DIR$/queueit-android-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-webui-sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/android-webui-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.iml" filepath="$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/demoapp/android-webui-sdk.demoapp.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.main.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-webui-sdk.library.unitTest.iml" />
     </modules>
   </component>
 </project>

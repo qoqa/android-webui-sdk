@@ -1,6 +1,9 @@
-apply plugin: 'com.android.application'
+plugins {
+    id("com.android.application")
+}
 
 android {
+    namespace "com.queue_it.shopdemo"
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 

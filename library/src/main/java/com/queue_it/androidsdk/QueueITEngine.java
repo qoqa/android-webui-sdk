@@ -122,7 +122,7 @@ public class QueueITEngine {
 
     public static String getSdkVersion()
     {
-        return "Android-" + BuildConfig.VERSION_NAME;
+        return "Android-3.2"; // + BuildConfig.VERSION_NAME;
     }
 
     private Runnable _checkConnection = new Runnable() {
