@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     //Queue-it
     //implementation project(path: ':library')
-    library_androidxImplementation project(path: ':library')
+    implementation project(path: ':library')
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

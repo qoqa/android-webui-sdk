@@ -60,7 +60,7 @@ afterEvaluate {
             }
 
             "$publicationName"(MavenPublication) {
-                from components."${variant.flavorName}Release"
+                from components."release"
                 artifactId variantArtifactId
                 group groupId
                 version libraryVersion
