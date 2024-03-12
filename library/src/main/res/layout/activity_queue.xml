@@ -1,29 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/queueToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp" />
-
-    <WebView
-        android:id="@+id/queueWebView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/queueToolbar" />
+    android:id="@+id/relativeLayout">
 
     <ProgressBar
-        android:id="@+id/queueProgressBar"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="8dp"
-        android:layout_below="@id/queueToolbar"
         android:max="100"
-        android:progressBackgroundTint="#FFFFFFFF"
         android:progressTint="#FF29A8FF"
-        android:visibility="gone"
-        tools:visibility="visible" />
-</RelativeLayout>
+        android:progressBackgroundTint="#FFFFFFFF"
+        android:visibility="gone" />
+</FrameLayout>

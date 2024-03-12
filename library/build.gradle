@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "2.0.13"
+        minSdkVersion 15
+        targetSdkVersion 30
+
+        buildConfigField 'String', 'VERSION_NAME', "\"$libraryVersion\""
     }
     buildTypes {
         release {
@@ -16,68 +16,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-dependencies {
-    implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-}
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'com.queue_it.androidsdk'
-
-    publishedGroupId = 'com.queue_it.androidsdk'
-    libraryName = 'com.queue_it.androidsdk'
-    artifact = 'library'
-
-    libraryDescription = 'Android SDK to integrate with Queue-it'
-
-    siteUrl = 'https://github.com/queueit/android-sdk'
-    gitUrl = 'https://github.com/queueit/android-sdk.git'
-
-    libraryVersion = android.defaultConfig.versionName
-
-    licenseName = 'MIT'
-    licenseUrl = 'MIT'
-    allLicenses = ["MIT"]
-}
-
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = publishedGroupId                               // Maven Group ID for the artifact
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                groupId publishedGroupId
-                artifactId artifact
-
-                name libraryName
-                description libraryDescription
-                url siteUrl
-
-                licenses {
-                    license {
-                        name licenseName
-                        url licenseUrl
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-
-                }
-            }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
         }
+    }
+
+
+    flavorDimensions "androidx"
+    productFlavors{
+        library_androidx
+        library
+    }
+    lint {
+        abortOnError false
     }
 }
 
-apply plugin: 'com.jfrog.bintray'
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
+    testImplementation 'pl.pragmatists:JUnitParams:1.0.5'
+    testImplementation 'org.robolectric:robolectric:4.4'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    library_androidxApi 'androidx.appcompat:appcompat:1.2.0'
+    library_androidxApi 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+
+    //noinspection GradleCompatible
+    libraryImplementation 'com.android.support:appcompat-v7:28.0.0'
+}
+
+apply plugin: 'maven-publish'
+
+group = groupId
 version = libraryVersion
 
 task sourcesJar(type: Jar) {
@@ -100,29 +76,11 @@ artifacts {
     archives sourcesJar
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    configurations = ['archives']
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        userOrg = 'queueit'
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-            gpg {
-                sign = true
-            }
-        }
-    }
+nexusStaging {
+    stagingProfileId = "219f8fe296e7e"
+    packageGroup = groupId
+    username = OSSRH_USERNAME
+    password = OSSRH_PASSWORD
 }
+
+apply from: '../publish.gradle' // Makes this library publishable
