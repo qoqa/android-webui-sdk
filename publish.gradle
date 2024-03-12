@@ -77,7 +77,7 @@ afterEvaluate {
                             dep.scope == "test"
                         }
                         // Create a signed pom if we need it
-                        // def pomFile = file("${project.buildDir}/generated-${variant.flavorName}-pom.xml")
+                        def pomFile = file("${project.buildDir}/generated-${variant.flavorName}-pom.xml")
                         writeTo(pomFile)
                         // signing.sign(pomFile)
                     }
