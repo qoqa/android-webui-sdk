@@ -121,11 +121,13 @@ public class UriOverrider implements IUriOverrider {
             uriOverride.onPassed(queueItToken);
             return true;
         }
-        if (!isQueueItUrl) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, destinationUri);
-            webview.getContext().startActivity(browserIntent);
-            return true;
-        }
+
+        // QoQa: Don't open link in external browser
+//        if (!isQueueItUrl) {
+//            Intent browserIntent = new Intent(Intent.ACTION_VIEW, destinationUri);
+//            webview.getContext().startActivity(browserIntent);
+//            return true;
+//        }
         return false;
     }
 }
