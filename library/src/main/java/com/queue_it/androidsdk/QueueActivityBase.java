@@ -18,7 +18,10 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import androidx.appcompat.widget.Toolbar;
 
 public class QueueActivityBase {
     private final Activity _context;
@@ -126,7 +129,18 @@ public class QueueActivityBase {
         cleanupWebView();
         final ProgressBar progressBar = _context.findViewById(R.id.progressBar);
 
-        FrameLayout layout = _context.findViewById(R.id.relativeLayout);
+        // QoQa: Add toolbar with back button
+        FrameLayout rootLayout = _context.findViewById(R.id.relativeLayout);
+
+        LinearLayout layout = new LinearLayout(_context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        rootLayout.addView(layout);
+
+        Toolbar toolbar = new Toolbar(_context);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(v -> _context.onBackPressed());
+        layout.addView(toolbar);
+
         webview = new WebView(_context);
         layout.addView(webview);
         previousWebView = webview;
