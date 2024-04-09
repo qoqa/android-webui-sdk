@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -17,7 +18,10 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import androidx.appcompat.widget.Toolbar;
 
 public class QueueActivityBase {
     private final Activity _context;
@@ -119,11 +123,24 @@ public class QueueActivityBase {
     public void initialize(Bundle savedInstanceState) {
         uriOverrider = new UriOverrider();
         _context.setContentView(R.layout.activity_queue);
+        // QoQa: Keep screen on
+        _context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         readActivityExtras(savedInstanceState);
         cleanupWebView();
         final ProgressBar progressBar = _context.findViewById(R.id.progressBar);
 
-        FrameLayout layout = _context.findViewById(R.id.relativeLayout);
+        // QoQa: Add toolbar with back button
+        FrameLayout rootLayout = _context.findViewById(R.id.relativeLayout);
+
+        LinearLayout layout = new LinearLayout(_context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        rootLayout.addView(layout);
+
+        Toolbar toolbar = new Toolbar(_context);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(v -> _context.onBackPressed());
+        layout.addView(toolbar);
+
         webview = new WebView(_context);
         layout.addView(webview);
         previousWebView = webview;
