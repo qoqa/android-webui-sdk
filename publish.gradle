@@ -60,7 +60,7 @@ afterEvaluate {
             }
 
             "$publicationName"(MavenPublication) {
-                from components."${variant.flavorName}Release"
+                from components."release"
                 artifactId variantArtifactId
                 group groupId
                 version libraryVersion
@@ -79,7 +79,7 @@ afterEvaluate {
                         // Create a signed pom if we need it
                         def pomFile = file("${project.buildDir}/generated-${variant.flavorName}-pom.xml")
                         writeTo(pomFile)
-                        signing.sign(pomFile)
+                        // signing.sign(pomFile)
                     }
                 }
             }
@@ -93,12 +93,12 @@ if (rootProject.file("local.properties").exists()) {
 }
 
 //Sign all of our publications with our PGP private key
-signing {
-    useInMemoryPgpKeys(PGP_KEY, PGP_PASSWORD)
-    publishing.publications.all { publication ->
-        sign(publication)
-    }
-}
+//signing {
+//    useInMemoryPgpKeys(PGP_KEY, PGP_PASSWORD)
+//    publishing.publications.all { publication ->
+//        sign(publication)
+//    }
+//}
 
 nexusPublishing {
     repositories {
